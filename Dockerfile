@@ -8,6 +8,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# TODO:SQLiteをインストール
+
 # プロジェクトの全てのファイルをコンテナ内の作業ディレクトリにコピー
 COPY . .
 
