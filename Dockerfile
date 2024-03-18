@@ -1,6 +1,10 @@
 # ベースイメージの指定
 FROM python:3.12-slim
 
+# 環境変数の設定
+ENV FLASK_APP=flaskr
+ENV FLASK_ENV=development
+
 # 作業ディレクトリの設定
 WORKDIR /app
 
