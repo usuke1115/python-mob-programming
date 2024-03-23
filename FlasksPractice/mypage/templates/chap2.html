@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二章</title>
+</head>
+<body>
+    <h1>第二章</h1>
+    <h2>フラスコの素材について</h2>
+    <p>本章では、フラスコに用いられる素材の特徴と用途について述べます。</p>
+    <p><a href="/">目次</a></p>
+
+    <!-- 以下のように引き渡した変数や定数materialsを埋め込むことができる -->
+    <ul>
+        {% for material in materials %}
+            <li><a href="/chap2/{{ material[0]}}">{{material[1]}}</a></li>
+        {%endfor%}
+    </ul>
+    
+</body>
+</html>
