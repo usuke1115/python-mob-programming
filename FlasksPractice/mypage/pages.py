@@ -53,7 +53,7 @@ def sections(section):
 
 materials = [('glass','ガラス'),
             ('plastic','プラスチック'),
-            ('flouric','フッ素樹脂'),
+            ('fluoric','フッ素樹脂'),
             ('stainless','ステンレス')]
 
 @flsk.route("/chap2")
