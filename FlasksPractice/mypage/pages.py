@@ -1,7 +1,9 @@
 #このファイルとフォルダのように「Flaskプロジェクト」の
 #「フォルダ名」と「ファイル名」は異なってもいい
 
-from flask import Flask, render_template #htmlテンプレートを差し込むためのモジュール
+from flask import Flask, render_template ,redirect
+#2つ目はhtmlテンプレートを差し込むためのモジュール
+#3つ目はリダイレクトをできるようにするためのモジュール
 
 flsk = Flask(__name__)
 
@@ -60,3 +62,16 @@ def chap2():
         #render_templateでテンプレートとしてhtmlを読み込む
         #第二引数はLaravelでいうcompact関数のようなものと思われる
         #キーワード＝渡す値
+
+#<a href="/chap2/{{ material[0]}}">{{material[1]}}</a>とchap2.htmlに記述していることに注意
+
+@flsk.route("/chap2/<material>")
+#URLに適切な材料名を入力した場合、その説明文を出力する
+def show_material(material):
+    for item in materials:
+        if material == item[0]:
+            return render_template(f"{material}.html",material_name = item[1])
+    
+    #render_templateはLarvelでいうところのview関数に強い
+    #該当しなければ、第二章のページにリダイレクト
+    return redirect("/chap2")

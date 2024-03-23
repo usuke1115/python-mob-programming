@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPage - {{material_name}}</title>
+</head>
+<body>
+    <h1>{{material_name}}</h1>
+    <!-- あるHTMLを「基本テンプレートである」という記述は利用するファイルの方に記述する。 -->
+    <!-- Laravelでいうslotのようなもの -->
+
+    {%block content%}<!--この部分に差し込まれる-->{%endblock%}
+
+    <p><a href="/chap2">第二章</a></p>
+    <p><a href="/">目次</a></p>
+</body>
+</html>
