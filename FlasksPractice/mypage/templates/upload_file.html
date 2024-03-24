@@ -1,0 +1,22 @@
+<p>***あなたの撮ったフラスコ写真***</p>
+
+{%if file_url%}アップロードされました
+    <p><img src="{{file_url}}" alt="{{ fname }}" height="200"></p>
+    <p>続けてアップロードできます</p>
+{%endif%}
+
+
+<p>写真をアップロードしてください</p>
+<form method="post" enctype="multipart/form-data">
+<!-- enctypeはファイルをテキストデータであるファイル名、画像本体であるピクセルデータなど
+    複数の情報の集合として送信できるようにしている -->
+<!-- actionはフォームに入力したデータをとばす先の指定のため、
+    ない場合、自分自身に「フォーム」の内容が送信されることになる -->
+    <p><label for="filedata">↓ここから</label></p>
+    <p><input type="file" id="filedata" name="filedata"></p>
+        
+    <p><input type="submit" value="送信"></p>
+</form>
+
+<p><a href="/chap2">第二章</a></p>
+<p><a href="/">目次</a></p>

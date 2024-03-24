@@ -1,19 +1,23 @@
 #このファイルとフォルダのように「Flaskプロジェクト」の
 #「フォルダ名」と「ファイル名」は異なってもいい
 
-from flask import Flask, render_template ,redirect
+from flask import (Flask, render_template, redirect, request, url_for)
 #2つ目はhtmlテンプレートを差し込むためのモジュール
 #3つ目はリダイレクトをできるようにするためのモジュール
+#URL「survey.html」のフォームから送られてきたデータは、
+#「Flask」の「requestオブジェクト」から取り出す
+#このとき、他のライブラリの「request」として処理されないように最初にインポートを宣言する
 
 flsk = Flask(__name__)
 
 #この下のflskはFlaskオブジェクトのインスタンス
 @flsk.route("/")#URL「/」が呼ばれたときの関数
 def index():
-            
     ct = "<h1>目次</h1>"
     ct += "<a href = '/chap1'>第一章</a>"
     ct += "<p><a href='/chap2'>第二章</a></p>"
+    ct += "<p><a href='/survey'>アンケート</a></p>"
+    ct += "<p><a href='/upload_file'>ファイルのアップロード</a></p>"
     return ct
 
 @flsk.route("/chap1")
@@ -75,3 +79,40 @@ def show_material(material):
     #render_templateはLarvelでいうところのview関数に強い
     #該当しなければ、第二章のページにリダイレクト
     return redirect("/chap2")
+
+@flsk.route("/survey")
+def survey():
+    return render_template("survey.html")
+
+@flsk.post("/show_survey")
+def show_survey():
+    return render_template("show_survey.html",
+        like = request.form['like'],
+        #name="like"としたinput要素のフォームに入力した値をshow_survey.htmlに渡す
+        
+        reason = request.form['reason']
+        #name="reason"としたtextarea要素のフォームに入力した値をshow_survey.htmlに渡す
+    )
+
+@flsk.route("/upload_file", methods = ['GET', 'POST'])
+# methods = ['GET', 'POST']は場合に応じてHTTPの「GET」と「POST」、どちらかの命令で呼ばれる
+# 初めて表示したときのようにデータが送信されていない状態では「GET」
+# 自分自身にデータが送信されると「POST」
+# ここのデコレータには「route」が用いられ、引数「methods」に命令を表す文字列のリストが渡される
+
+def upload_file():
+    if request.method=="POST":  #指定されたメソッドがPOSTの場合
+        file = request.files['filedata']
+        fname = file.filename
+        file.save(f"static/img/{fname}")
+        file_url = url_for('static', filename=f"img/{fname}")
+    #url_forは「Flask」の関数のため最初に
+
+        return render_template("upload_file.html", file_url=file_url, fname=fname)
+
+    return render_template("upload_file.html") #指定されたメソッドがGETの場合
+
+
+
+
+

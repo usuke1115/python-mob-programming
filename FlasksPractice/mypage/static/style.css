@@ -1,0 +1,14 @@
+/* 何も指定が無い場合、基本テンプレートとしたファイルにCSSがあたる？？ */
+
+body{
+    margin-top: 20px;
+    margin-left: 20px;
+    color: maroon;
+    background-color: ivory;
+}
+
+h1{
+    color: khaki;
+    background-color: maroon;
+    padding-left: 10px;
+}
