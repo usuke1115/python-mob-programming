@@ -1,0 +1,15 @@
+<h2>フラスコ一覧</h2>
+<table border="1">
+    {% for item in items %}
+        <tr>
+            <td><a href="show_item/{{ item.id }}">{{ item.id }}</a></td>
+            <td><img src="{{ item.imgurl }}" alt="各画像のURL", height="80"></td>
+            <td>{{ item.itemname }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<p><a href="/insertz_item">新規データの入力</a></p>
+<p><a href="/">トップページへ</a></p>
+
+

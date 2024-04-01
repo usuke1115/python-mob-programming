@@ -1,0 +1,16 @@
+<!-- data_inserted.htmlの外側だけをカスタマイズする基本テンプレート -->
+
+<h2>{% block whatisit %}{% endblock %}</h2>
+<!-- whatisitというブロックの名前は自由につけたもので、「何のぺーじかをここに書き込む」 -->
+<p>
+    <img src="{{ item.imgurl }}" alt="画像のURL">
+</p>
+<ul>
+    <li>名前:{{ item.itemname }}フラスコ</li>
+    <li>特徴:{{ item.comment }}</li>
+</ul>
+{% block wheretogo %}{% endblock %}
+<!-- wheretogo　というブロックで「どこに行くのかをここに書き込む」 -->
+<p><a href="/show_list">一覧へ</a></p>
+<p><a href="/">トップページへ</a></p>
+
