@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サプーアプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>サプー書店</h1>
+        <form method="post" action="{{ url_for('register') }}">
+            <!-- url_for の引数は実行させたいpythonの関数名 -->
+            <table border="1">
+                <!-- trは１行を表す -->
+                    <tr>
+                        <th>入荷日</th>
+                        <th>タイトル</th>
+                        <th>金額</th>
+                    </tr>
+                    <tr>
+                        <td><input type="date" name="arrival_day" title="arrival_day" placeholder="入荷日を選択"></td>
+                        <td><input type="text" name="title" title="title" placeholder="タイトルを入力"></td>
+                        <td><input type="text" name="price" title="price" placeholder="金額のみを入力（※円は要らない）"></td>
+                    </tr>
+            </table>
+            <br>
+            <input type="submit" value="登録">
+        </form>
+</body>
+</html>
