@@ -25,7 +25,7 @@ def init_db():
     
     if not os.path.exists(db_dir):
         os.makedirs(db_dir)
-    
+
     # データベースのテーブルを作成
     db.create_all()
     # テストユーザーの追加
