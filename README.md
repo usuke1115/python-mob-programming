@@ -17,7 +17,7 @@ Docker Desktopを開いて、Dockerが正常に起動していることを確認
 **手順4: アプリケーションを実行する**
 
 ビルドしたDockerイメージからコンテナを起動し、アプリケーションを実行します。  
-`docker run -p 5000:5000 python-mob-programming-app:v1.0`  
+`docker run -p 5000:5000 --env-file=./.env -v .:/web python-mob-programming-app:v1.0 `  
 これにより、アプリケーションが起動できます！  
 
 [http://localhost:5000](http://localhost:5000)にアクセスして「Hello Docker」が表示されるのを確認して下さい。

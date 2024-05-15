@@ -1,6 +1,6 @@
 from flask import Blueprint, Response
 
-from app.repositories import UserRepository
+from web.repositories import UserRepository
 
 # Blueprintのオブジェクトを生成する
 app = Blueprint("hello_world", __name__)

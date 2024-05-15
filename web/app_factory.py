@@ -6,7 +6,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
 
-    from app.models import db
+    from web.models import db
 
     db.init_app(app)
 
@@ -16,7 +16,7 @@ def create_app():
         with app.app_context():
             db.create_all()
             # テストユーザーの追加
-            from app.models import User
+            from web.models import User
 
             if not User.query.first():
                 db.session.add(User(name="Alice"))
