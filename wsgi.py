@@ -3,7 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////app/data/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////web/data/test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -20,7 +20,7 @@ def hello_world():
 @app.route('/initdb')
 def init_db():
     # データベースファイルとディレクトリの存在を確認
-    db_path = '/app/data/test.db'
+    db_path = '/web/data/test.db'
     db_dir = os.path.dirname(db_path)
     
     if not os.path.exists(db_dir):
