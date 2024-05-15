@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 # 作業ディレクトリの設定
-WORKDIR /web
+WORKDIR /app
 
 # 必要なパッケージのインストール
 COPY requirements.txt .
