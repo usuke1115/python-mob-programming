@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY wsgi.py .
 
 # アプリケーションファイルをコンテナ内の作業ディレクトリにコピー
-COPY app/ app/
+COPY flaskr/ flaskr/
 
 # アプリケーションファイルをコンテナ内の作業ディレクトリにコピー
 COPY data/ data/
