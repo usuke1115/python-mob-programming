@@ -1,4 +1,4 @@
-from web.models import User
+from app.models import User
 
 
 class UserRepository:

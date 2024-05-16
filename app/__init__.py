@@ -1,7 +1,7 @@
 from flask import Flask
 
-from web.app_factory import create_app
-from web import health, hello_world
+from app.app_factory import create_app
+from app import health, hello_world
 
 app: Flask = create_app()
 
