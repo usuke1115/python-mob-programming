@@ -15,7 +15,7 @@ COPY .env .
 COPY wsgi.py .
 
 # アプリケーションファイルをコンテナ内の作業ディレクトリにコピー
-COPY web/ web/
+COPY app/ app/
 
 # アプリケーションファイルをコンテナ内の作業ディレクトリにコピー
 COPY data/ data/
