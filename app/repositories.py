@@ -1,4 +1,4 @@
-from app.models import User
+from app.models import db, User
 
 
 class UserRepository:
@@ -6,4 +6,4 @@ class UserRepository:
         self.model = model
 
     def find_all(self) -> list[User]:
-        return User.query.all()
+        return db.session.execute(db.select(User.__table__)).mappings()
