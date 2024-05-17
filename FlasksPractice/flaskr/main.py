@@ -1,6 +1,9 @@
-from flaskr import app
+from flask import Flask
+app = Flask(__name__)  #flaskのオブジェクトを作成
 from flask import render_template, request, redirect, url_for
-import sqlite3
+import sqlite3,db
+#空のテーブルを作る
+db.create_books_table()
 DATABASE = 'database.db'
 
 #今回の場合、flask --app main runで開発用サーバーを起動

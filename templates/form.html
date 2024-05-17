@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progaku Python URL shortener</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="howto">
+        <h1 class="title">短縮URLの使い方</h1>
+        <ul>
+            <li><p>短縮したいURLを下の入力フォームに入れる</p></li>
+            <li><p>convertボタンを押して短縮</p></li>
+            <li><p>短縮されたURLをブラウザに入力しても元のURLに遷移します</p></li>
+        </ul>
+    </div>
+    <div class="form">
+        <form method="post" action="{{ url_for('convert') }}">
+            <!-- url_for の引数は実行させたいpythonの関数名 -->
+            <div>
+                <p><input type="url" name="originalurl" title="originalurl" placeholder="短縮したいURLを入力"></p>
+                <p><input type="password" name="keyword" title="keyword" placeholder="キーワードを入力"></p>
+                <p><input type="submit" value="短縮（convert）"></p>
+                {% if urls[1] != "" %}
+                <p>短縮URLは「{{ urls[1] }}」</p>
+                <p><a href="url_for(form)">戻る</a></p>
+                {% elif %}
+                <p>短縮するURLはまだ入力されていません。</p>
+                {% endif %}
+            </div>
+        </form>
+        <p>
+            <button>
+                短縮URLをコピー
+            </button>
+        </p>
+    </div>
+</body>
+</html>
