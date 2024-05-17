@@ -8,6 +8,9 @@ WORKDIR /web
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# 環境変数ファイルをコピー
+COPY .env .
+
 # wsgi.pyを作業ディレクトリ配下へコピー
 COPY wsgi.py .
 
@@ -18,4 +21,4 @@ COPY app/ app/
 COPY data/ data/
 
 # アプリケーションの実行
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "run", "--host=0.0.0.0", "--debugger", "--reload"]
