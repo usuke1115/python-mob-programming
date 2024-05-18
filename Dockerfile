@@ -4,7 +4,10 @@ FROM python:3.12-slim
 # 作業ディレクトリの設定
 WORKDIR /web
 
-# 
+# DBデータを格納するフォルダ作成
+RUN mkdir data
+
+# 一応セキュリティ対策のパッケージバージョンアップ
 RUN apt-get update && apt-get install \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*

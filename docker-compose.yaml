@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/develop.conf:/etc/nginx/conf.d/develop.conf
+    depends_on:
+      - flask
+  flask:
+    env_file:
+      - .env
+    build: 
+      context: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask/:/web/
+    command: ["flask", "run", "--host=0.0.0.0", "--debugger", "--reload"]
