@@ -28,4 +28,4 @@ $ cp example.env .env
 `docker compose up`  
 これにより、アプリケーションが起動できます！  
 
-[http://localhost:5000](http://localhost:5000)にアクセスして「Hello Docker」が表示されるのを確認して下さい。
+[http://localhost](http://localhost)にアクセスして「Hello Docker」が表示されるのを確認して下さい。
