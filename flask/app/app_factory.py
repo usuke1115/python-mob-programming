@@ -1,8 +1,14 @@
 import os
+
 from flask import Flask
 
 
-def create_app():
+def create_app()->Flask:
+    """flaskアプリを初期化する関数
+
+    :return: Flaskのオブジェクト
+    :rtype: Flask
+    """
     app = Flask(__name__)
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
 
