@@ -1,7 +1,11 @@
-from flask import Flask
+r""""flask shortened URL generation app.
 
-from app.app_factory import create_app
+このアプリは短縮URLを作成します。
+"""
+
 from app import health, hello_world
+from app.app_factory import create_app
+from flask import Flask
 
 app: Flask = create_app()
 
