@@ -29,3 +29,16 @@ $ cp example.env .env
 これにより、アプリケーションが起動できます！  
 
 [http://localhost](http://localhost)にアクセスして「Hello Docker」が表示されるのを確認して下さい。
+
+
+**開発者向け**
+
+パッケージマネージャーに[poetry](https://cocoatomo.github.io/poetry-ja/basic-usage/)を使用しています。
+
+***開発時初期設定***
+
+```sh
+$ poetry install
+```
+
+上記コマンドでvenvが作成され、パッケージのインストールが完了します。
