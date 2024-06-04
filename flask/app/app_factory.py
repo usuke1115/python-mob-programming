@@ -1,15 +1,15 @@
 import os
 
-from flask import Flask
+from flask import (Flask, render_template, url_for, request, redirect)
 
-
+app = Flask(__name__)
 def create_app()->Flask:
     """flaskアプリを初期化する関数
 
     :return: Flaskのオブジェクト
     :rtype: Flask
     """
-    app = Flask(__name__)
+
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
 
     from app.models import db
@@ -31,3 +31,15 @@ def create_app()->Flask:
                 db.session.commit()
 
     return app
+
+
+# ----------------短縮URLの生成---------------------------------
+@app.route('/form')
+def show():
+    return render_template(
+        'form.html'
+    )
+
+@app.route('/shorten-url')
+def createShortenUrl():
+    pass
