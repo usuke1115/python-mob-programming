@@ -19,10 +19,10 @@
         </ul>
     </div>
     <div class="form">
-        <form method="post" action="{{ url_for('createShortenUrl') }}">
+        <form method="post" action="{{ url_for('takeURL') }}">
             <!-- url_for の引数は実行させたいpythonの関数名 -->
             <div>
-                <p><input type="url" name="originalurl" title="originalurl" placeholder="短縮したいURLを入力"></p>
+                <p><input type="url" name="originalURL" title="originalURL" placeholder="短縮したいURLを入力"></p>
                 <p><input type="password" name="keyword" title="keyword" placeholder="キーワードを入力"></p>
                 <p><input type="submit" value="短縮"></p>
             </div>
