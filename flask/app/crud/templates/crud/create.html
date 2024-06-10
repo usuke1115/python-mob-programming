@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Progaku Python URL shortener</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('crud.static', filename='style.css') }}">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
         </ul>
     </div>
     <div class="form">
-        <form method="post" action="{{ url_for('takeURL') }}">
+        <form method="post" action="{{ url_for('crud.takeURL') }}">
             <!-- url_for の引数は実行させたいpythonの関数名 -->
             <div>
                 <p><input type="url" name="originalURL" title="originalURL" placeholder="短縮したいURLを入力"></p>

@@ -1,4 +1,4 @@
-from app import app
+from app.crud import app
 from werkzeug.serving import run_simple
 
 if __name__ == "__main__":
