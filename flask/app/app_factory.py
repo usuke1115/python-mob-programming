@@ -17,11 +17,6 @@ def create_app()->Flask:
 
     db.init_app(app)
 
-    #crudパッケージ（ディレクトリ）からviewsをcrud_viewsという名前でimportする
-    from app.crud import views as crud_views
-
-    #register_bluepointを使いviewsのcrudをアプリへ登録する
-    app.register_blueprint(crud_views.crud, url_prefix="/crud")
 
     # 開発時のみ、DBのsqliteにUserデータを作成する
     if app.config.get("DEBUG"):

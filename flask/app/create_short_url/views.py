@@ -1,8 +1,8 @@
 from flask import (Flask, render_template, url_for, request, redirect, jsonify, Blueprint)
 
-#Blueprintでcrudアプリを生成する
-crud = Blueprint(
-    "crud",
+#Blueprintでcreate_short_urlアプリを生成する
+create_short_url = Blueprint(
+    "create_short_url",
     __name__,
     template_folder="templates",
     static_folder="static"
@@ -11,14 +11,14 @@ crud = Blueprint(
 # ----------------短縮URLの生成---------------------------------
 
 #showFormエンドポイントを作成し、create.htmlを返す
-@crud.route('/')
+@create_short_url.route('/')
 def showForm():
     return render_template(
-        'crud/create.html'
+        'create_short_url/create.html'
     )#引数にはtenmplatesフォルダからのパスを記載
 
 #Form内容の取得
-@crud.route('/takeURL', methods = ["GET","POST"])
+@create_short_url.route('/takeURL', methods = ["GET","POST"])
 def takeURL():
     if request.method == "POST":
             #POST送信されたリクエストを取得する
