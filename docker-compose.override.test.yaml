@@ -1,0 +1,8 @@
+services:
+  flask:
+    build: 
+      context: .
+      target: test
+    volumes:
+      - ./:/web/
+    command: ["poetry", "run", "tox"]
