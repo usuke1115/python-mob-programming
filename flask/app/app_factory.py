@@ -1,7 +1,19 @@
-import os
+import os, logging
 
-from flask import (Flask, render_template, url_for, request, redirect, jsonify, Blueprint)
+from app import randomNstrings
 
+from flask import (
+    Flask,
+    render_template,
+    url_for,
+    request,
+    redirect,
+    jsonify,
+    Blueprint,
+    flash
+)
+
+from flask_debugtoolbar import DebugToolbarExtension
 
 def create_app()->Flask:
     """flaskアプリを初期化する関数
@@ -12,6 +24,20 @@ def create_app()->Flask:
 
     app = Flask(__name__)
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
+
+    # セッションが必要<==Flashメッセージを使いたい
+    #SECRET_KEYを追加（<==セッション情報を使えるようにする）
+    secretkey = randomNstrings(20)
+    app.config["SECRET_KEY"] = secretkey
+
+    #ロガーのログレベルを設定
+    app.logger.setLevel(logging.DEBUG)
+
+    #リダイレクトを中断しないようにする
+    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+
+    #ブラウザの右側にデバッグツールバーが表示されるようにする
+    toolbar = DebugToolbarExtension(app)
 
     from app.models import db
 
