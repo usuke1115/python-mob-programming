@@ -24,7 +24,3 @@ app.register_blueprint(hello_world.app)
 #15行目でimportしたapi.pyの短縮URL生成ロジック(shorten)をアプリへ登録
 app.register_blueprint(api.shortenURL, url_prefix="/api")
 
-#ランダム文字列を設定する関数
-def randomNstrings(n):
-    randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
-    return ''.join(randlst)
