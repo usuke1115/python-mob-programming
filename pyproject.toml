@@ -17,7 +17,6 @@ python = "^3.12"
 flask = ">=2.0"
 werkzeug = ">=2.0"
 flask-sqlalchemy = "^3.1.1"
-factory-boy = "^3.3.0"
 
 [tool.poetry.group.dev.dependencies]
 tox-uv = "^1.8.2"
@@ -25,6 +24,7 @@ ruff = "^0.4.5"
 mypy = "^1.10.0"
 pytest = "^8.2.1"
 coverage = "^7.5.3"
+factory-boy = "^3.3.0"
 
 [build-system]
 requires = ["poetry-core"]
