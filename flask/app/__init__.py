@@ -10,11 +10,14 @@ from flask import Flask
 import app.models
 from app.db_check import result
 from app import shortenURL_api
-
+from app.create_short_url import views
 
 app: Flask = create_app()
 app.register_blueprint(health.app)
 app.register_blueprint(hello_world.app)
+
+#from画面のviewのレンダリングをアプリへ登録
+app.register_blueprint(views.create_short_url, url_prefix="/shorten-url")
 
 #shortenURL_api.pyの短縮URL生成ロジック(shortenURL)をアプリへ登録
 app.register_blueprint(shortenURL_api.shortenURL, url_prefix="/api")

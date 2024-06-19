@@ -19,7 +19,7 @@ def showForm():
 
 #Form内容の取得
 @create_short_url.route('/takeURL', methods = ["GET","POST"])
-def takeURL():
+def takeURL(): # <--Formのactionと対応していないため協議の後、関数名変更
     if request.method == "POST":
             #POST送信されたリクエストを取得する
         originURL = request.form.get('originalURL')

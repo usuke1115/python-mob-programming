@@ -2,13 +2,13 @@ import os, logging
 
 from pathlib import Path
 
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 
 from flask_sqlalchemy import SQLAlchemy
 
 from flask import Flask
 
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 # SQLAlchemyだけの初期化
 db = SQLAlchemy()
@@ -30,7 +30,7 @@ def create_app()->Flask:
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
     # ブラウザの右側にデバッグツールバーが表示されるようにする
-    toolbar = DebugToolbarExtension(app)
+    # toolbar = DebugToolbarExtension(app)
 
     # ---------------------------------------------------------------------------------
     from app.models import db
@@ -39,7 +39,7 @@ def create_app()->Flask:
     db.init_app(app)
 
     #Migrateとアプリを連携
-    Migrate(app,db)
+    # Migrate(app,db)
 
     # 開発時のみ、DBのsqliteにUserデータを作成する
     if app.config.get("DEBUG"):
