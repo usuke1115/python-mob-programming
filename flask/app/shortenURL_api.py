@@ -8,11 +8,12 @@ from flask import (
     Blueprint,
     flash
 )
+from app.models import db, Url
 
 import random,string
 
 #ランダム文字列を設定する関数
-def randomNstrings(n):
+def random_nstrings(n):
     randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
     return ''.join(randlst)
 
@@ -22,44 +23,40 @@ sha256 = hashlib.sha256()
 
 shortenURL = Blueprint("shortenURL", __name__)
 
-#Form内容の取得
+#短縮URLの生成
 @shortenURL.route('/shorten-url', methods = ["GET","POST"])
-def createShortUrl():
+def create_short_url():
     #if request.method == "POST":
             #POST送信されたリクエストを取得する（↑後でコメントアウトをとればよい？）
-        originalURL = request.get_json()["originalurl"]
-        #上の右辺は、request.form.get('originalURL')に差し替える？
+        original_url = request.get_json()["original_url"]
+        #上の右辺は、request.form.get('original_url')に差し替える？
         keyword = request.get_json()["keyword"]
         #上の右辺は、request.form.get('keyword')に差し替える？
-        
 
-        #入力チェック
-        # is_valid = True
-
-        # if not originalURL:
-        #     flash("短縮したいURLを入力してください")
-        #     is_valid = False
-        
-        # if not is_valid:
-        #     return render_template('create_short_url/create.html')
-        # #引数にはtemplatesフォルダからのパスを記載
-        
-        # #flash関数を使ってFlashメッセージを出せるように設定
-        # #テンプレートでget_flashed_messages関数を使って取得して表示
-        # flash("表示された短縮URLをコピーボタンを押してコピーしてアクセスすると、短縮前のURLにリダイレクトします")
-
-    #短縮URLの生成
         prefix = "https://"
-        hashedOriginalURL = sha256.update(originalURL.encode())
-        hashedOriginalURL = sha256.hexdigest()
-        shortenedURL = prefix + hashedOriginalURL[0:5] + keyword
-        if len(hashedOriginalURL[0:5] + keyword) < 15:
-            difference = 15 - len(hashedOriginalURL[0:5] + keyword)
-            shortenedURL = prefix + hashedOriginalURL[0:5] + randomNstrings(difference) + keyword
+        hashed_original_url = sha256.update(original_url.encode())
+        hashed_original_url = sha256.hexdigest()
+        shortened_url = prefix + hashed_original_url[0:5] + keyword
+        if len(hashed_original_url[0:5] + keyword) < 15:
+            difference = 15 - len(hashed_original_url[0:5] + keyword)
+            shortened_url = prefix + hashed_original_url[0:5] + (difference) + keyword
 
-        data = {"originalURL": originalURL, "shortenedURL": shortenedURL}
-        URLdata = jsonify(data)
-        return URLdata
+        data = {"original_url": original_url, "shortened_url": shortened_url}
+        url_data = jsonify(data)
+
+        #登録するレコードに相当するインスタンスを作る
+        latest_shortened_url = Url(
+            original_url = data["original_url"],
+            shortened_url = data["shortened_url"]
+        )
+
+        #上のレコードに相当するインスタンスを追加
+        db.session.add(latest_shortened_url)
+
+        #レコード追加をDBに反映
+        db.session.commit()
+
+        return url_data
 
 
 

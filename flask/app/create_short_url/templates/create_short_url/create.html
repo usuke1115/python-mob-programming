@@ -6,46 +6,39 @@
     <title>Progaku Python URL shortener</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('create_short_url.static', filename='style.css') }}"
+      type="text/css"
+      href="{{ url_for('create_short_url.static', filename='css/style.css') }}"
     />
   </head>
   <body>
-    <!-- 適宜差し替えてください -->
-
-    <div class="howto">
-      <h1 class="title">短縮URLの使い方</h1>
-      <ul>
-        <li><p>短縮したいURLを下の入力フォームに入れる</p></li>
-        <li><p>convertボタンを押して短縮</p></li>
-        <li><p>短縮されたURLをブラウザに入力しても元のURLに遷移します</p></li>
-      </ul>
-    </div>
-    <div class="form">
-      <form method="post" action="{{ url_for('create_short_url.takeURL') }}">
-        <!-- url_for の引数は実行させたいpythonの関数名 -->
-        <div>
-          <p>
-            <input
-              type="url"
-              name="originalURL"
-              title="originalURL"
-              placeholder="短縮したいURLを入力"
-            />
-          </p>
-          <p>
-            <input
-              type="password"
-              name="keyword"
-              title="keyword"
-              placeholder="キーワードを入力"
-            />
-          </p>
-          <p><input type="submit" value="短縮" /></p>
+      <div class="container">
+        <p class="text" id="title">短縮URLサービス</p>
+        <div class="form__area">
+          <form class="form"  method="POST" action="./">
+            <input required class="input" type="text" placeholder="短縮したいURLを入力してください">
+            <input class="input" type="text" placeholder="URLに組み込みたいキーワードを入力してください（任意）">
+            </br>
+            <input class="input" id="submit__btn" type="submit" value="短縮">
+          </form>
         </div>
-      </form>
-      <p>
-        <button>短縮URLをコピー</button>
-      </p>
-    </div>
+        <div class="result">
+          <table class="items">
+            <tr class="item">
+              <td class="origin">https://exmaple.com</td>
+              <td class="shorten__url">https://e.com(短縮後のURL)</td>
+              <td class="copy"><button class="copy__btn" type="button">copy</button></td>
+            </tr>
+            <tr class="item">
+              <td class="origin">https://exmaple.com</td>
+              <td class="shorten__url">https://e.com/hoge(短縮後のURL)</td>
+              <td class="copy"><button class="copy__btn" type="button">copy</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    <script
+      type="text/javascript"
+      src="{{ url_for('create_short_url.static', filename='js/index.js') }}">
+    </script>
   </body>
 </html>

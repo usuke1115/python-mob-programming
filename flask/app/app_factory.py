@@ -1,18 +1,17 @@
 import os, logging
 
+from pathlib import Path
 
-from flask import (
-    Flask,
-    render_template,
-    url_for,
-    request,
-    redirect,
-    jsonify,
-    Blueprint,
-    flash
-)
+from flask_migrate import Migrate
 
-# from flask_debugtoolbar import DebugToolbarExtension
+from flask_sqlalchemy import SQLAlchemy
+
+from flask import Flask
+
+from flask_debugtoolbar import DebugToolbarExtension
+
+# SQLAlchemyだけの初期化
+db = SQLAlchemy()
 
 def create_app()->Flask:
     """flaskアプリを初期化する関数
@@ -24,24 +23,23 @@ def create_app()->Flask:
     app = Flask(__name__)
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
 
-    # # セッションが必要<==Flashメッセージを使いたい
-    # #SECRET_KEYを追加（<==セッション情報を使えるようにする）
-    # secretkey = randomNstrings(20)
-    # app.config["SECRET_KEY"] = secretkey
-
     #ロガーのログレベルを設定
     app.logger.setLevel(logging.DEBUG)
 
     #リダイレクトを中断しないようにする
     app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
-    # #ブラウザの右側にデバッグツールバーが表示されるようにする
-    # toolbar = DebugToolbarExtension(app)
+    # ブラウザの右側にデバッグツールバーが表示されるようにする
+    toolbar = DebugToolbarExtension(app)
 
+    # ---------------------------------------------------------------------------------
     from app.models import db
 
+    #SQLAlchemyとアプリを連携する
     db.init_app(app)
 
+    #Migrateとアプリを連携
+    Migrate(app,db)
 
     # 開発時のみ、DBのsqliteにUserデータを作成する
     if app.config.get("DEBUG"):
