@@ -21,4 +21,8 @@ for (let i = 0; i < copyButtons.length; i++) {
                     changeButtonText(clickedButton);
                 });
     });
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> d1a10e9d89c45bfcdd17a5c5e54fc5a9f4e6ee64
