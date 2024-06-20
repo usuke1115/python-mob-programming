@@ -9,6 +9,7 @@ from flask import (
 )
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 
 # db（SQLAlchemyインスタンス）とUrlクラスをimportする
 from app.app_factory import db
@@ -32,8 +33,8 @@ def show_all():
 #引数にはtenmplatesフォルダからのパスを記載
 
 # ---------------最後に短縮したURLの表示---------------------------------
-# @crud.route('/show_last')
-# def show_last():
-#     last_record = db.session.query(Url).order_by(desc(Url.id)).first()
-#     return render_template('db_check/index.html',last_record=last_record)
+@crud.route('/show_last')
+def show_last():
+    last_record = db.session.query(Url).order_by(desc(Url.id)).first()
+    return render_template('db_check/index.html',last_record=last_record)
 
