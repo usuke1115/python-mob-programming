@@ -8,7 +8,12 @@ from flask import (
     Blueprint,
     flash
 )
-from app.models import db, Url
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
+
+# db（SQLAlchemyインスタンス）とUrlクラスをimportする
+from app.app_factory import db
+from app.models import Url
 
 import random,string
 
@@ -21,6 +26,7 @@ def random_nstrings(n):
 import hashlib
 sha256 = hashlib.sha256()
 
+# BlueprintでshortenURLアプリを生成する
 shortenURL = Blueprint("shortenURL", __name__)
 
 #短縮URLの生成
