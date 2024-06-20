@@ -73,4 +73,4 @@ paths:
             application/json:
               schema:
                 type: string
-                example: "https://exmaple.com"
+                example: "https://example.com"
