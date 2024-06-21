@@ -326,4 +326,7 @@ fabric.properties
 .history
 .ionide
 
+# The hidden file on Mac
+.DS_store
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,pythonvanilla,flask,pycharm
