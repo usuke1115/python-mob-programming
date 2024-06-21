@@ -45,7 +45,7 @@ def create_short_url():
         shortened_url = prefix + hashed_original_url[0:5] + keyword
         if len(hashed_original_url[0:5] + keyword) < 15:
             difference = 15 - len(hashed_original_url[0:5] + keyword)
-            shortened_url = prefix + hashed_original_url[0:5] + (difference) + keyword
+            shortened_url = prefix + hashed_original_url[0:5] + random_nstrings(difference) + keyword
 
         data = {"original_url": original_url, "shortened_url": shortened_url}
         url_data = jsonify(data)
@@ -55,13 +55,11 @@ def create_short_url():
             original_url = data["original_url"],
             shortened_url = data["shortened_url"]
         )
-
         #上のレコードに相当するインスタンスを追加
         db.session.add(latest_shortened_url)
 
         #レコード追加をDBに反映
         db.session.commit()
-
         return url_data
 
 

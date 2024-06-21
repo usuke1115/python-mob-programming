@@ -39,7 +39,7 @@ def create_app()->Flask:
     db.init_app(app)
 
     #Migrateとアプリを連携
-    # Migrate(app,db)
+    # Migrate(app, db)
 
     # 開発時のみ、DBのsqliteにUserデータを作成する
     if app.config.get("DEBUG"):
