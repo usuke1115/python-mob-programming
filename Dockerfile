@@ -54,3 +54,19 @@ COPY flask/app/ app/
 
 # アプリケーションの実行
 CMD ["python", "server.py", "--host=0.0.0.0"]
+
+# test用実行環境
+FROM build as test
+
+# 作業ディレクトリの設定
+WORKDIR /web
+
+ENV PYTHONPATH=/web/flask
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:/root/.local/bin:$PATH"
+
+# ファイルをコンテナ内にコピー
+COPY ./flask .
+COPY ./tox.ini .
+
+# アプリケーションの実行
+CMD ["poetry", "run", "tox"]

@@ -42,3 +42,11 @@ $ poetry install
 ```
 
 上記コマンドでvenvが作成され、パッケージのインストールが完了します。
+
+***testの実行***
+
+```sh
+$ docker compose -f docker-compose.yaml -f docker-compose.override.test.yaml run --rm flask 
+```
+
+上記コマンドで
