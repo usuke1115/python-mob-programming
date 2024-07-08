@@ -1,0 +1,100 @@
+body {
+    background-color: aliceblue;
+}
+
+button {
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 4%;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 70%;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.text {
+  text-align: center;
+}
+
+.form {
+  text-align: center;
+}
+
+.input {
+  border: none;
+  width: 600px;
+  font-size: 1.05rem;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+  
+.input:focus {
+  outline: none;
+}
+
+#submit__btn {
+  width: 150px;
+  background-color: blue;
+  color: white;
+  font-size: 1.0rem;
+  cursor: pointer;
+}
+
+#submit__btn:hover {
+  opacity: 70%;
+}
+
+.items {
+  background-color: white;
+  width: 100%;
+  margin-top: 40px;
+  border-collapse: collapse;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid gray;
+}
+
+.origin {
+  width: 40%;
+  max-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+  line-height: 2.2rem;
+}
+
+.shorten__url {
+  width: 40%;
+  max-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copy {
+  width: 8%;
+}
+
+.copy__btn {
+  height: 25px;
+}
+
+#title {
+  padding-top: 80px;
+  font-size: 3rem;
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> d1a10e9d89c45bfcdd17a5c5e54fc5a9f4e6ee64
