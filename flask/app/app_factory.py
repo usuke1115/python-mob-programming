@@ -1,17 +1,11 @@
-import os, logging
-
-from pathlib import Path
+import logging
+import os
 
 # from flask_migrate import Migrate
-
-from flask_sqlalchemy import SQLAlchemy
-
 from flask import Flask
 
 # from flask_debugtoolbar import DebugToolbarExtension
 
-# SQLAlchemyだけの初期化
-db = SQLAlchemy()
 
 def create_app()->Flask:
     """flaskアプリを初期化する関数
@@ -19,7 +13,6 @@ def create_app()->Flask:
     :return: Flaskのオブジェクト
     :rtype: Flask
     """
-
     app = Flask(__name__)
     app.config.from_object(os.environ.get("CONFIG_OBJECT"))
 
@@ -47,12 +40,6 @@ def create_app()->Flask:
         with app.app_context():
             db.create_all()
             # テストユーザーの追加
-            from app.models import User
 
-            if not User.query.first():
-                db.session.add(User(name="Alice"))
-                db.session.add(User(name="Bob"))
-                db.session.add(User(name="Charlie"))
-                db.session.commit()
 
     return app

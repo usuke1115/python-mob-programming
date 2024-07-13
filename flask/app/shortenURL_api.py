@@ -1,66 +1,56 @@
-from flask import (
-    Flask,
-    render_template,
-    url_for,
-    request,
-    redirect,
-    jsonify,
-    Blueprint,
-    flash
-)
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc
+import random
+import string
+
+from app.repositories import UrlRepository
 
 # db（SQLAlchemyインスタンス）とUrlクラスをimportする
-from app.app_factory import db
-from app.models import Url
+from app.schemas import CreateUrlModel, ShortenUrlRequestModel, UrlResponseModel
+from flask import Blueprint, Response, current_app, jsonify, request
 
-import random,string
 
 #ランダム文字列を設定する関数
 def random_nstrings(n):
     randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
-    return ''.join(randlst)
+    return "".join(randlst)
 
 #入力されたパスワードをハッシュ化する
 import hashlib
+
 sha256 = hashlib.sha256()
 
 # BlueprintでshortenURLアプリを生成する
 shortenURL = Blueprint("shortenURL", __name__)
 
 #短縮URLの生成
-@shortenURL.route('/shorten-url', methods = ["GET","POST"])
-def create_short_url():
-    #if request.method == "POST":
-            #POST送信されたリクエストを取得する（↑後でコメントアウトをとればよい？）
-        original_url = request.get_json()["original_url"]
-        #上の右辺は、request.form.get('original_url')に差し替える？
-        keyword = request.get_json()["keyword"]
-        #上の右辺は、request.form.get('keyword')に差し替える？
+@shortenURL.route("/shorten-url", methods = ["GET","POST"])
+def create_short_url()-> Response:
+    request_params = ShortenUrlRequestModel(**request.get_json())
 
-        prefix = "https://"
-        hashed_original_url = sha256.update(original_url.encode())
-        hashed_original_url = sha256.hexdigest()
-        shortened_url = prefix + hashed_original_url[0:5] + keyword
-        if len(hashed_original_url[0:5] + keyword) < 15:
-            difference = 15 - len(hashed_original_url[0:5] + keyword)
-            shortened_url = prefix + hashed_original_url[0:5] + random_nstrings(difference) + keyword
+    keyword = request_params.keyword or ""
 
-        data = {"original_url": original_url, "shortened_url": shortened_url}
-        url_data = jsonify(data)
+    prefix = "https://"
+    sha256.update(str(request_params.original_url).encode())
+    hashed_original_url = sha256.hexdigest()
+    shortened_url = prefix + hashed_original_url[0:5] + keyword
+    if len(hashed_original_url[0:5] + keyword) < 15:
+        difference = 15 - len(hashed_original_url[0:5] + keyword)
+        shortened_url = prefix + current_app.config.get("SERVER_NAME") + "/" + hashed_original_url[0:5] + random_nstrings(difference) + keyword
 
-        #登録するレコードに相当するインスタンスを作る
-        latest_shortened_url = Url(
-            original_url = data["original_url"],
-            shortened_url = data["shortened_url"]
-        )
-        #上のレコードに相当するインスタンスを追加
-        db.session.add(latest_shortened_url)
 
-        #レコード追加をDBに反映
-        db.session.commit()
-        return url_data
+    url_repository = UrlRepository()
+
+    #登録するレコードに相当するインスタンスを作る
+    latest_shortened_url = CreateUrlModel(
+        original_url = str(request_params.original_url),
+        shortened_url = shortened_url,
+    )
+    #上のレコードに相当するインスタンスを追加
+    inserted_id = url_repository.create(latest_shortened_url)
+
+    url_data = url_repository.find_by_id(inserted_id)
+    response_model = UrlResponseModel.model_validate(url_data)
+
+    return jsonify(response_model.model_dump()), 201
 
 
 
